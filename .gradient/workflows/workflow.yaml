@@ -32,3 +32,14 @@ jobs:
       - CloneRepo
     inputs:
       mnist-sample: CloneRepo.outputs.mnist-sample
+  HelloWorld:
+    resources:
+      instance-type: C5
+    needs:
+      - CloneRepo
+    inputs:
+      repo: CloneRepo.outputs.repo
+    uses: script@v1
+    with:
+      script: python /inputs/repo/hello.py
+      image: tensorflow/tensorflow:1.14.0-py3
